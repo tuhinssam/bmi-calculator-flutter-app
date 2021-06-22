@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/RoundIconButton.dart';
+import 'package:bmi_calculator/results_page.dart';
 import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
@@ -16,6 +17,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 180;
+  int weight = 60;
+  int age = 18;
   // Color maleCardColor = inactiveCardColor;
   // Color femaleCardColor = inactiveCardColor;
   //
@@ -155,16 +158,30 @@ class _InputPageState extends State<InputPage> {
                         children: <Widget>[
                           Text('WEIGHT', style: kContentTextStyle),
                           Text(
-                            '60',
+                            weight.toString(),
                             style: kNumberTextStyle,
                           ),
                           Row(
                             //crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              RoundIconButton(icon: FontAwesomeIcons.minus),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: () {
+                                  setState(() {
+                                    weight--;
+                                  });
+                                },
+                              ),
                               SizedBox(width: 10),
-                              RoundIconButton(icon: FontAwesomeIcons.plus),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPressed: () {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
+                              ),
                             ],
                           ),
                         ]),
@@ -178,15 +195,29 @@ class _InputPageState extends State<InputPage> {
                         children: <Widget>[
                           Text('AGE', style: kContentTextStyle),
                           Text(
-                            '60',
+                            age.toString(),
                             style: kNumberTextStyle,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              RoundIconButton(icon: FontAwesomeIcons.minus),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: () {
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
+                              ),
                               SizedBox(width: 10),
-                              RoundIconButton(icon: FontAwesomeIcons.plus),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPressed: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                              ),
                             ],
                           )
                         ]),
@@ -194,11 +225,25 @@ class _InputPageState extends State<InputPage> {
                 )
               ],
             )),
-            Container(
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: kButtonContainerHeight,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ResultsPage();
+                }));
+              },
+              child: Container(
+                child: Center(
+                  child: Text(
+                    'CALCULATE',
+                    style: kCalculateBtnTxtStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                color: kBottomContainerColor,
+                margin: EdgeInsets.only(top: 10.0),
+                width: double.infinity,
+                height: kButtonContainerHeight,
+              ),
             )
           ],
         ));
