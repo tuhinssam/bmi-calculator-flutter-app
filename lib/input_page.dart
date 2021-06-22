@@ -20,58 +20,44 @@ class _InputPageState extends State<InputPage> {
                 child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Container(
-                    margin: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0XFF0A0E33),
-                    ),
-                  ),
+                  child: ReusableWidget(colour: Color(0XFF0A0E33)),
                 ),
                 Expanded(
-                  child: Container(
-                    margin: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0XFF0A0E33),
-                    ),
-                  ),
+                  child: ReusableWidget(colour: Color(0XFF0A0E33)),
                 )
               ],
             )),
             Expanded(
-              child: Container(
-                margin: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Color(0XFF0A0E33),
-                ),
-              ),
+              child: ReusableWidget(colour: Color(0XFF0A0E33)),
             ),
             Expanded(
                 child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Container(
-                    margin: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0XFF0A0E33),
-                    ),
-                  ),
+                  child: ReusableWidget(colour: Color(0XFF0A0E33)),
                 ),
                 Expanded(
-                  child: Container(
-                    margin: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0XFF0A0E33),
-                    ),
-                  ),
+                  child: ReusableWidget(colour: Color(0XFF0A0E33)),
                 )
               ],
             ))
           ],
         ));
+  }
+}
+
+class ReusableWidget extends StatelessWidget {
+  final Color colour;
+  ReusableWidget({@required this.colour});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: colour,
+      ),
+    );
   }
 }
