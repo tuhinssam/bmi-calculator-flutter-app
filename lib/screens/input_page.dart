@@ -1,11 +1,14 @@
-import 'package:bmi_calculator/RoundIconButton.dart';
-import 'package:bmi_calculator/results_page.dart';
-import 'package:bmi_calculator/reusable_card.dart';
+import 'package:bmi_calculator/componenets/BottomButton.dart';
+import 'package:bmi_calculator/componenets/RoundIconButton.dart';
+import 'package:bmi_calculator/main.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
+import 'package:bmi_calculator/componenets/reusable_card.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../calculator_brain.dart';
+import '../constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'icon_content.dart';
+import '../componenets/icon_content.dart';
 
 enum Gender { Male, Female }
 
@@ -229,27 +232,28 @@ class _InputPageState extends State<InputPage> {
                 )
               ],
             )),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return ResultsPage();
-                }));
-              },
-              child: Container(
-                child: Center(
-                  child: Text(
-                    'CALCULATE',
-                    style: kCalculateBtnTxtStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                color: kBottomContainerColor,
-                margin: EdgeInsets.only(top: 10.0),
-                width: double.infinity,
-                height: kButtonContainerHeight,
-              ),
-            )
+            BottomButton(
+                buttonTitle: 'CALCULATE',
+                onTap: () {
+                  CalculatorBrain clacBrain =
+                      CalculatorBrain(height: height, weight: weight);
+                  String bmiRes = clacBrain.calculateBMI();
+                  String resultText = clacBrain.getResult();
+                  String interpret = clacBrain.getInterpretation();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ResultsPage(
+                        bmiResult: bmiRes,
+                        resultText: resultText,
+                        interpretation: interpret);
+                  }));
+                })
           ],
         ));
   }
 }
+
+// () {
+// Navigator.push(context, MaterialPageRoute(builder: (context) {
+// return ResultsPage();
+// }));
+// }

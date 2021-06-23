@@ -1,11 +1,18 @@
 import 'dart:ffi';
 
-import 'package:bmi_calculator/reusable_card.dart';
+import 'package:bmi_calculator/componenets/BottomButton.dart';
+import 'package:bmi_calculator/componenets/reusable_card.dart';
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
+import '../constants.dart';
 
 class ResultsPage extends StatelessWidget {
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
+
+  ResultsPage({this.bmiResult, this.resultText, this.interpretation});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,15 +47,15 @@ class ResultsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Normal',
+                      resultText,
                       style: kResultTextStyle,
                     ),
                     Text(
-                      '24.5',
+                      bmiResult,
                       style: kNumberTextStyle,
                     ),
                     Text(
-                      'Information',
+                      interpretation,
                       style: kResultInfoStyle,
                     )
                   ],
@@ -56,26 +63,11 @@ class ResultsPage extends StatelessWidget {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pop(context, MaterialPageRoute(builder: (context) {
-                return ResultsPage();
-              }));
-            },
-            child: Container(
-              child: Center(
-                child: Text(
-                  'RE-CALCULATE',
-                  style: kCalculateBtnTxtStyle,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: kButtonContainerHeight,
-            ),
-          )
+          BottomButton(
+              buttonTitle: 'RE-CALCULATE',
+              onTap: () {
+                Navigator.pop(context);
+              })
         ],
       ),
     );
